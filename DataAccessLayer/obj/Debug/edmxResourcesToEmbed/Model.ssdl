@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aluno">
+    <Key>
+      <PropertyRef Name="IdAluno" />
+    </Key>
+    <Property Name="IdAluno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTurma" Type="int" />
+    <Property Name="NomeAluno" Type="nvarchar" MaxLength="50" />
+    <Property Name="Matricula" Type="int" />
+    <Property Name="Cpf" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Disciplina">
+    <Key>
+      <PropertyRef Name="IdDisciplina" />
+    </Key>
+    <Property Name="IdDisciplina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NomeDisciplina" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Turma">
+    <Key>
+      <PropertyRef Name="IdTurma" />
+    </Key>
+    <Property Name="IdTurma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroTurma" Type="int" />
+  </EntityType>
+  <EntityType Name="TurmaDisciplina">
+    <Key>
+      <PropertyRef Name="IdTurma" />
+      <PropertyRef Name="IdDisciplina" />
+    </Key>
+    <Property Name="IdTurma" Type="int" Nullable="false" />
+    <Property Name="IdDisciplina" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AlunoTurma">
+    <End Role="Turma" Type="Self.Turma" Multiplicity="0..1" />
+    <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turma">
+        <PropertyRef Name="IdTurma" />
+      </Principal>
+      <Dependent Role="Aluno">
+        <PropertyRef Name="IdTurma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TurmaDisciplina_Disciplina">
+    <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="1" />
+    <End Role="TurmaDisciplina" Type="Self.TurmaDisciplina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disciplina">
+        <PropertyRef Name="IdDisciplina" />
+      </Principal>
+      <Dependent Role="TurmaDisciplina">
+        <PropertyRef Name="IdDisciplina" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TurmaDiscplina_Turma">
+    <End Role="Turma" Type="Self.Turma" Multiplicity="1" />
+    <End Role="TurmaDisciplina" Type="Self.TurmaDisciplina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turma">
+        <PropertyRef Name="IdTurma" />
+      </Principal>
+      <Dependent Role="TurmaDisciplina">
+        <PropertyRef Name="IdTurma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Disciplina" EntityType="Self.Disciplina" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Turma" EntityType="Self.Turma" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TurmaDisciplina" EntityType="Self.TurmaDisciplina" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AlunoTurma" Association="Self.FK_AlunoTurma">
+      <End Role="Turma" EntitySet="Turma" />
+      <End Role="Aluno" EntitySet="Aluno" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TurmaDisciplina_Disciplina" Association="Self.FK_TurmaDisciplina_Disciplina">
+      <End Role="Disciplina" EntitySet="Disciplina" />
+      <End Role="TurmaDisciplina" EntitySet="TurmaDisciplina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TurmaDiscplina_Turma" Association="Self.FK_TurmaDiscplina_Turma">
+      <End Role="Turma" EntitySet="Turma" />
+      <End Role="TurmaDisciplina" EntitySet="TurmaDisciplina" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

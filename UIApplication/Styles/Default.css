@@ -1,0 +1,18 @@
+﻿body {
+font-family: Verdana;
+font-size: 9pt;
+padding: 30px;
+background-color: #EAEAEA;
+}
+
+table, th, td  { padding: 6px; }
+
+#pagina
+{
+    width: 0 auto;
+    height: 0 auto;
+    padding: 20px;
+    background-color: #FFF;
+    border: 1px solid #CCC;
+    display: block;
+} 

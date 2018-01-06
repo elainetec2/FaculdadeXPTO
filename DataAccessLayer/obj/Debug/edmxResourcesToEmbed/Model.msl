@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+  <Alias Key="Model" Value="Model" />
+  <Alias Key="Target" Value="Model.Store" />
+  <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelStoreContainer">
+    <EntitySetMapping Name="Aluno">
+      <EntityTypeMapping TypeName="Model.Aluno">
+        <MappingFragment StoreEntitySet="Aluno">
+          <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+          <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+          <ScalarProperty Name="NomeAluno" ColumnName="NomeAluno" />
+          <ScalarProperty Name="IdTurma" ColumnName="IdTurma" />
+          <ScalarProperty Name="IdAluno" ColumnName="IdAluno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Disciplina">
+      <EntityTypeMapping TypeName="Model.Disciplina">
+        <MappingFragment StoreEntitySet="Disciplina">
+          <ScalarProperty Name="NomeDisciplina" ColumnName="NomeDisciplina" />
+          <ScalarProperty Name="IdDisciplina" ColumnName="IdDisciplina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Turma">
+      <EntityTypeMapping TypeName="Model.Turma">
+        <MappingFragment StoreEntitySet="Turma">
+          <ScalarProperty Name="NumeroTurma" ColumnName="NumeroTurma" />
+          <ScalarProperty Name="IdTurma" ColumnName="IdTurma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TurmaDisciplina" TypeName="Model.TurmaDisciplina" StoreEntitySet="TurmaDisciplina">
+      <EndProperty Name="Turma">
+        <ScalarProperty Name="IdTurma" ColumnName="IdTurma" />
+      </EndProperty>
+      <EndProperty Name="Disciplina">
+        <ScalarProperty Name="IdDisciplina" ColumnName="IdDisciplina" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="IdAluno" />
+          </Key>
+          <Property Name="IdAluno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTurma" Type="int" />
+          <Property Name="NomeAluno" Type="nvarchar" MaxLength="50" />
+          <Property Name="Matricula" Type="int" />
+          <Property Name="Cpf" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="IdDisciplina" />
+          </Key>
+          <Property Name="IdDisciplina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeDisciplina" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Turma">
+          <Key>
+            <PropertyRef Name="IdTurma" />
+          </Key>
+          <Property Name="IdTurma" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroTurma" Type="int" />
+        </EntityType>
+        <EntityType Name="TurmaDisciplina">
+          <Key>
+            <PropertyRef Name="IdTurma" />
+            <PropertyRef Name="IdDisciplina" />
+          </Key>
+          <Property Name="IdTurma" Type="int" Nullable="false" />
+          <Property Name="IdDisciplina" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AlunoTurma">
+          <End Role="Turma" Type="Self.Turma" Multiplicity="0..1" />
+          <End Role="Aluno" Type="Self.Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turma">
+              <PropertyRef Name="IdTurma" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="IdTurma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TurmaDisciplina_Disciplina">
+          <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="1" />
+          <End Role="TurmaDisciplina" Type="Self.TurmaDisciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disciplina">
+              <PropertyRef Name="IdDisciplina" />
+            </Principal>
+            <Dependent Role="TurmaDisciplina">
+              <PropertyRef Name="IdDisciplina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TurmaDiscplina_Turma">
+          <End Role="Turma" Type="Self.Turma" Multiplicity="1" />
+          <End Role="TurmaDisciplina" Type="Self.TurmaDisciplina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turma">
+              <PropertyRef Name="IdTurma" />
+            </Principal>
+            <Dependent Role="TurmaDisciplina">
+              <PropertyRef Name="IdTurma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disciplina" EntityType="Self.Disciplina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Turma" EntityType="Self.Turma" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TurmaDisciplina" EntityType="Self.TurmaDisciplina" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AlunoTurma" Association="Self.FK_AlunoTurma">
+            <End Role="Turma" EntitySet="Turma" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TurmaDisciplina_Disciplina" Association="Self.FK_TurmaDisciplina_Disciplina">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="TurmaDisciplina" EntitySet="TurmaDisciplina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TurmaDiscplina_Turma" Association="Self.FK_TurmaDiscplina_Turma">
+            <End Role="Turma" EntitySet="Turma" />
+            <End Role="TurmaDisciplina" EntitySet="TurmaDisciplina" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aluno" EntityType="Model.Aluno" />
+          <EntitySet Name="Disciplina" EntityType="Model.Disciplina" />
+          <EntitySet Name="Turma" EntityType="Model.Turma" />
+          <AssociationSet Name="FK_AlunoTurma" Association="Model.FK_AlunoTurma">
+            <End Role="Turma" EntitySet="Turma" />
+            <End Role="Aluno" EntitySet="Aluno" />
+          </AssociationSet>
+          <AssociationSet Name="TurmaDisciplina" Association="Model.TurmaDisciplina">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Turma" EntitySet="Turma" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Aluno">
+          <Key>
+            <PropertyRef Name="IdAluno" />
+          </Key>
+          <Property Name="IdAluno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTurma" Type="Int32" />
+          <Property Name="NomeAluno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Turma" Relationship="Model.FK_AlunoTurma" FromRole="Aluno" ToRole="Turma" />
+          <Property Name="Matricula" Type="Int32" />
+          <Property Name="Cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Disciplina">
+          <Key>
+            <PropertyRef Name="IdDisciplina" />
+          </Key>
+          <Property Name="IdDisciplina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeDisciplina" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Turma" Relationship="Model.TurmaDisciplina" FromRole="Disciplina" ToRole="Turma" />
+        </EntityType>
+        <EntityType Name="Turma">
+          <Key>
+            <PropertyRef Name="IdTurma" />
+          </Key>
+          <Property Name="IdTurma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroTurma" Type="Int32" />
+          <NavigationProperty Name="Aluno" Relationship="Model.FK_AlunoTurma" FromRole="Turma" ToRole="Aluno" />
+          <NavigationProperty Name="Disciplina" Relationship="Model.TurmaDisciplina" FromRole="Turma" ToRole="Disciplina" />
+        </EntityType>
+        <Association Name="FK_AlunoTurma">
+          <End Type="Model.Turma" Role="Turma" Multiplicity="0..1" />
+          <End Type="Model.Aluno" Role="Aluno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Turma">
+              <PropertyRef Name="IdTurma" />
+            </Principal>
+            <Dependent Role="Aluno">
+              <PropertyRef Name="IdTurma" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TurmaDisciplina">
+          <End Type="Model.Disciplina" Role="Disciplina" Multiplicity="*" />
+          <End Type="Model.Turma" Role="Turma" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model" />
+        <Alias Key="Target" Value="Model.Store" />
+        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelStoreContainer">
+          <EntitySetMapping Name="Aluno">
+            <EntityTypeMapping TypeName="Model.Aluno">
+              <MappingFragment StoreEntitySet="Aluno">
+                <ScalarProperty Name="Cpf" ColumnName="Cpf" />
+                <ScalarProperty Name="Matricula" ColumnName="Matricula" />
+                <ScalarProperty Name="NomeAluno" ColumnName="NomeAluno" />
+                <ScalarProperty Name="IdTurma" ColumnName="IdTurma" />
+                <ScalarProperty Name="IdAluno" ColumnName="IdAluno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disciplina">
+            <EntityTypeMapping TypeName="Model.Disciplina">
+              <MappingFragment StoreEntitySet="Disciplina">
+                <ScalarProperty Name="NomeDisciplina" ColumnName="NomeDisciplina" />
+                <ScalarProperty Name="IdDisciplina" ColumnName="IdDisciplina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Turma">
+            <EntityTypeMapping TypeName="Model.Turma">
+              <MappingFragment StoreEntitySet="Turma">
+                <ScalarProperty Name="NumeroTurma" ColumnName="NumeroTurma" />
+                <ScalarProperty Name="IdTurma" ColumnName="IdTurma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TurmaDisciplina" TypeName="Model.TurmaDisciplina" StoreEntitySet="TurmaDisciplina">
+            <EndProperty Name="Turma">
+              <ScalarProperty Name="IdTurma" ColumnName="IdTurma" />
+            </EndProperty>
+            <EndProperty Name="Disciplina">
+              <ScalarProperty Name="IdDisciplina" ColumnName="IdDisciplina" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

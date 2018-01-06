@@ -1,0 +1,10 @@
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\EntityFramework.dll
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\EntityFramework.xml
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+c:\users\elaine\documents\visual studio 2015\Projects\CursoSolution\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

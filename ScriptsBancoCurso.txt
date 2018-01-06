@@ -1,0 +1,57 @@
+CREATE TABLE dbo.[Disciplina](
+		[IdDisciplina] [int]  IDENTITY(1,1) NOT NULL,
+		[NomeDisciplina] [nvarchar](50) NULL,
+		CONSTRAINT PK_Disciplina PRIMARY KEY CLUSTERED (IdDisciplina) 		
+)
+
+CREATE TABLE dbo.[Turma](
+		[IdTurma] [int]  IDENTITY(1,1) NOT NULL,
+		[NumeroTurma] [int] NULL,
+		CONSTRAINT PK_Turma PRIMARY KEY CLUSTERED (IdTurma) 		
+)
+
+CREATE TABLE dbo.[TurmaDisciplina] (
+				[IdTurma] [int] NOT NULL ,
+				[IdDisciplina] [int] NOT NULL ,
+				CONSTRAINT [PK_TurmaDisciplina] PRIMARY KEY  CLUSTERED 
+				(
+					[IdTurma],
+					[IdDisciplina]
+				)  ON [PRIMARY] ,
+				CONSTRAINT [FK_TurmaDiscplina_Turma] FOREIGN KEY 
+				(
+					[IdTurma]
+				) REFERENCES [Turma] (
+					[IdTurma]
+				),
+				CONSTRAINT [FK_TurmaDisciplina_Disciplina] FOREIGN KEY 
+				(
+					[IdDisciplina]
+				) REFERENCES [Disciplina] (
+					[IdDisciplina]
+				)
+			) ON [PRIMARY]
+
+
+CREATE TABLE dbo.[Aluno](
+		[IdAluno] [int]  IDENTITY(1,1) NOT NULL,
+		[IdTurma] [int] NULL,
+		[Matricula] [int] NULL,
+		[NomeAluno] [nvarchar](50) NULL,
+		[Cpf] [nvarchar](50) NULL,
+		CONSTRAINT PK_Aluno PRIMARY KEY CLUSTERED (IdAluno),
+		CONSTRAINT [FK_AlunoTurma] FOREIGN KEY 
+				(
+					[IdTurma]
+				) REFERENCES [Turma] (
+					[IdTurma]
+				)		
+)
+
+
+
+INSERT INTO [dbo].[Turma]
+           ([NumeroTurma])
+     VALUES
+           (01),
+		   (02)

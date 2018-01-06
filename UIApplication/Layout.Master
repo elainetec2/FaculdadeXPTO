@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="UIApplication.Layout" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Provider-IT</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Styles/Default.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="formulario" runat="server">
+    <div id="pagina">
+        <h3>Projeto Curso</h3>
+        <ul>
+            <li> <a href="ConsultaAlunos.aspx">Pesquisar Alunos</a></li>
+            <li> <a href="CadastroAlunos.aspx">Cadastrar Alunos</a></li>
+         </ul>
+
+        <hr />
+
+        <asp:ContentPlaceHolder ID="Body" runat="server"></asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

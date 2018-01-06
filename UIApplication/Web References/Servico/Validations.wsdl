@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ValidaCpf">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cpf" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidaCpfResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValidaCpfResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidaCpfSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidaCpf" />
+  </wsdl:message>
+  <wsdl:message name="ValidaCpfSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidaCpfResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ValidationsSoap">
+    <wsdl:operation name="ValidaCpf">
+      <wsdl:input message="tns:ValidaCpfSoapIn" />
+      <wsdl:output message="tns:ValidaCpfSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ValidationsSoap" type="tns:ValidationsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidaCpf">
+      <soap:operation soapAction="http://tempuri.org/ValidaCpf" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValidationsSoap12" type="tns:ValidationsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidaCpf">
+      <soap12:operation soapAction="http://tempuri.org/ValidaCpf" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Validations">
+    <wsdl:port name="ValidationsSoap" binding="tns:ValidationsSoap">
+      <soap:address location="http://localhost:1050/WebService/Validations.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValidationsSoap12" binding="tns:ValidationsSoap12">
+      <soap12:address location="http://localhost:1050/WebService/Validations.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

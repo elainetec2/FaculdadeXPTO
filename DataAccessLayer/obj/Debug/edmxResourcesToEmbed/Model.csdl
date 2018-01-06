@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aluno" EntityType="Model.Aluno" />
+    <EntitySet Name="Disciplina" EntityType="Model.Disciplina" />
+    <EntitySet Name="Turma" EntityType="Model.Turma" />
+    <AssociationSet Name="FK_AlunoTurma" Association="Model.FK_AlunoTurma">
+      <End Role="Turma" EntitySet="Turma" />
+      <End Role="Aluno" EntitySet="Aluno" />
+    </AssociationSet>
+    <AssociationSet Name="TurmaDisciplina" Association="Model.TurmaDisciplina">
+      <End Role="Disciplina" EntitySet="Disciplina" />
+      <End Role="Turma" EntitySet="Turma" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Aluno">
+    <Key>
+      <PropertyRef Name="IdAluno" />
+    </Key>
+    <Property Name="IdAluno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTurma" Type="Int32" />
+    <Property Name="NomeAluno" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Turma" Relationship="Model.FK_AlunoTurma" FromRole="Aluno" ToRole="Turma" />
+    <Property Name="Matricula" Type="Int32" />
+    <Property Name="Cpf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Disciplina">
+    <Key>
+      <PropertyRef Name="IdDisciplina" />
+    </Key>
+    <Property Name="IdDisciplina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeDisciplina" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Turma" Relationship="Model.TurmaDisciplina" FromRole="Disciplina" ToRole="Turma" />
+  </EntityType>
+  <EntityType Name="Turma">
+    <Key>
+      <PropertyRef Name="IdTurma" />
+    </Key>
+    <Property Name="IdTurma" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroTurma" Type="Int32" />
+    <NavigationProperty Name="Aluno" Relationship="Model.FK_AlunoTurma" FromRole="Turma" ToRole="Aluno" />
+    <NavigationProperty Name="Disciplina" Relationship="Model.TurmaDisciplina" FromRole="Turma" ToRole="Disciplina" />
+  </EntityType>
+  <Association Name="FK_AlunoTurma">
+    <End Type="Model.Turma" Role="Turma" Multiplicity="0..1" />
+    <End Type="Model.Aluno" Role="Aluno" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Turma">
+        <PropertyRef Name="IdTurma" />
+      </Principal>
+      <Dependent Role="Aluno">
+        <PropertyRef Name="IdTurma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TurmaDisciplina">
+    <End Type="Model.Disciplina" Role="Disciplina" Multiplicity="*" />
+    <End Type="Model.Turma" Role="Turma" Multiplicity="*" />
+  </Association>
+</Schema>
